@@ -18,11 +18,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<!-- 重新加载验证码 -->
+	<script type="text/javascript">
+		function reloadCode(){
+		//IE缓存，识别不出是新的请求还是原先已缓存的，so time
+			var time = new Date().getTime();
+			document.getElementById("imagecode").src="<%=request.getContextPath() %>/servlet/ImageServlet?d="+time;
+		}
+	</script>
   </head>
   
   <body>
     验证码：<input type="text" name="checkcode"/>
-    <img alt="验证码" src="<%=request.getContextPath()%>/servlet/ImageServlet"/>
+    <img alt="验证码" id="imagecode" src="<%=request.getContextPath()%>/servlet/ImageServlet"/>
     <a href="javascript:reloadCode();">看不清楚</a>
     <br>
   </body>
